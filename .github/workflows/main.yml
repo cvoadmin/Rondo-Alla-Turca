@@ -4,6 +4,32 @@ on:
   workflow_dispatch:
     types: restart-server
   workflow_run:
+    workflows: ["rondo2"]
+    types:
+      - completed
+
+jobs:
+  start-server:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Load start-server.sh from secret
+        run: |
+          echo "${{ secrets.START_SERVER_SCRIPT }}" > start-server.sh
+      - name: Start server
+        run: |
+          nohup ./start-server.sh &
+          while true; do
+            # Keep job running
+            sleep 10
+          done
+name: rondo2
+
+on:
+  workflow_dispatch:
+    types: restart-server
+  workflow_run:
     workflows: ["rondo"]
     types:
       - completed
