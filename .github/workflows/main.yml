@@ -1,7 +1,7 @@
 name: rondo
 
 on:
-  repository_dispatch:
+  push:
     types: restart-server
   workflow_run:
     workflows: ["rondo"]
