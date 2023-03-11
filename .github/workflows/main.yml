@@ -10,5 +10,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Start server
+        env:
+          START_SCRIPT: ${{ secrets.START_SERVER_SCRIPT }}
         run: |
-          ./start-server.sh
+          nohup ${START_SCRIPT} &
+          sleep infinity
