@@ -1,12 +1,12 @@
-name: rondo
+name: Server
 
 on:
-  repository_dispatch:
-    types: restart-server
   workflow_run:
-    workflows: ["rondo"]
+    workflows: ["server"]
     types:
       - completed
+    # Restart job if it fails
+    result: failure
 
 jobs:
   start-server:
@@ -14,9 +14,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Load start-server.sh from secret
-        run: |
-          echo "${{ secrets.START_SERVER_SCRIPT }}" > start-server.sh
       - name: Start server
         run: |
           nohup ./start-server.sh &
