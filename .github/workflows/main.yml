@@ -1,7 +1,9 @@
 name: Start Server
 
 on:
-  workflow_dispatch:
+  schedule:
+    - cron: '1 */6 * * *'
+  push:
 
 jobs:
   start-server:
