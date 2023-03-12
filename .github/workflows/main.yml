@@ -2,7 +2,7 @@ name: Start Server
 
 on:
   schedule:
-    - cron: '40 */6 * * *'
+    - cron: '59 */6 * * *'
   push:
 
 jobs:
